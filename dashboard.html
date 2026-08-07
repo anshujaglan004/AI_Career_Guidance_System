@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <style>
+
+        body{
+            background:#f4f6f9;
+        }
+
+        .card{
+            border:none;
+            border-radius:15px;
+            transition:0.3s;
+        }
+
+        .card:hover{
+            transform:translateY(-6px);
+            box-shadow:0 10px 20px rgba(0,0,0,.15);
+        }
+
+        .icon{
+            font-size:50px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<!-- Navbar -->
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+<div class="container">
+
+<a class="navbar-brand">
+
+🤖 AI Career Guidance System
+
+</a>
+
+<a
+href="/logout"
+class="btn btn-danger">
+
+Logout
+
+</a>
+
+</div>
+
+</nav>
+
+<!-- Main Container -->
+
+<div class="container mt-5">
+
+<div class="text-center mb-5">
+
+<h2>
+
+Welcome,
+
+<b>{{ username }}</b>
+
+👋
+
+</h2>
+<div class="row mt-4">
+
+    <div class="col-md-3">
+        <div class="card text-center shadow">
+            <div class="card-body">
+                <h2>📄</h2>
+                <h5>Resume</h5>
+
+                {% if prediction %}
+                    <span class="badge bg-success">Uploaded</span>
+                {% else %}
+                    <span class="badge bg-danger">Not Uploaded</span>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card text-center shadow">
+            <div class="card-body">
+                <h2>📊</h2>
+                <h5>Resume Score</h5>
+
+                {% if prediction %}
+                    <h3>{{ prediction.resume_score }}%</h3>
+                {% else %}
+                    <h3>--</h3>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card text-center shadow">
+            <div class="card-body">
+                <h2>🎯</h2>
+                <h5>Career</h5>
+
+                {% if prediction %}
+                    <small>{{ prediction.career }}</small>
+                {% else %}
+                    <small>Not Available</small>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card text-center shadow">
+            <div class="card-body">
+                <h2>🛠</h2>
+                <h5>Skills Found</h5>
+
+                {% if prediction %}
+                    <h3>{{ prediction.skills_found|length }}</h3>
+                {% else %}
+                    <h3>0</h3>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<p class="text-muted">
+
+Choose any feature below.
+
+</p>
+
+</div>
+
+<div class="row">
+
+<!-- Resume Upload -->
+
+<div class="col-md-4 mb-4">
+
+<div class="card shadow">
+
+<div class="card-body text-center">
+
+<div class="icon">
+
+📄
+
+</div>
+
+<h4>
+
+Resume Upload
+
+</h4>
+
+<p>
+
+Upload your resume for AI analysis.
+
+</p>
+
+<a
+href="/resume"
+class="btn btn-primary w-100">
+
+Open
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- AI Report -->
+
+<div class="col-md-4 mb-4">
+
+<div class="card shadow">
+
+<div class="card-body text-center">
+
+<div class="icon">
+
+📊
+
+</div>
+
+<h4>
+
+AI Report
+
+</h4>
+
+<p>
+
+Complete AI resume analysis report.
+
+</p>
+
+<a
+href="/report"
+class="btn btn-success w-100">
+
+Open
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Career Recommendation -->
+
+<div class="col-md-4 mb-4">
+
+<div class="card shadow">
+
+<div class="card-body text-center">
+
+<div class="icon">
+
+🎯
+
+</div>
+
+<h4>
+
+Career Recommendation
+
+</h4>
+
+<p>
+
+Best career recommended by AI.
+
+</p>
+
+<a
+href="/career"
+class="btn btn-warning w-100">
+
+Open
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Skill Gap -->
+
+<div class="col-md-4 mb-4">
+
+<div class="card shadow">
+
+<div class="card-body text-center">
+
+<div class="icon">
+
+📈
+
+</div>
+
+<h4>
+
+Skill Gap Analysis
+
+</h4>
+
+<p>
+
+Identify missing skills.
+
+</p>
+
+<a
+href="/skill-gap"
+class="btn btn-info w-100">
+
+Open
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Learning Roadmap -->
+
+<div class="col-md-4 mb-4">
+
+<div class="card shadow">
+
+<div class="card-body text-center">
+
+<div class="icon">
+
+📚
+
+</div>
+
+<h4>
+
+Learning Roadmap
+
+</h4>
+
+<p>
+
+Personalized learning path.
+
+</p>
+
+<a
+href="/roadmap"
+class="btn btn-secondary w-100">
+
+Open
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Interview Preparation -->
+
+<div class="col-md-4 mb-4">
+
+<div class="card shadow">
+
+<div class="card-body text-center">
+
+<div class="icon">
+
+💬
+
+</div>
+
+<h4>
+
+Interview Preparation
+
+</h4>
+
+<p>
+
+Practice AI interview questions.
+
+</p>
+
+<a
+href="/interview"
+class="btn btn-dark w-100">
+
+Open
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+
+</div>
+
+
+
+
+
+<hr class="mt-5">
+
+<footer class="text-center py-4">
+
+    <h4 class="text-primary fw-bold">
+        🚀 Dream Big. Learn Every Day. Achieve More.
+    </h4>
+
+    <p class="lead text-muted mt-3">
+        Every successful career begins with the courage to take the first step.
+        Keep learning, keep improving, and let your skills shape your future.
+    </p>
+
+    <p class="text-success fw-bold">
+        "Success is where preparation and opportunity meet."
+    </p>
+
+</footer>
+
+</body>
+
+</html>
